@@ -34322,7 +34322,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.1
+  m_VoxelSize: 0.16666667
   m_BuildHeightMesh: 1
   m_NavMeshData: {fileID: 0}
 --- !u!1 &1631544748
@@ -55315,6 +55315,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1644787523179334393, guid: c80ed202901bf5d4f8f830fe09343afe, type: 3}
+      propertyPath: sprintSpeed
+      value: 6.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1644787523179334393, guid: c80ed202901bf5d4f8f830fe09343afe, type: 3}
       propertyPath: crouchingCenter.y
       value: 0.3
