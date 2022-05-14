@@ -5,6 +5,7 @@ using UnityEngine;
 public class Elevator : MonoBehaviour
 {
     Animator anim;
+    public GameObject eleAudio;
     public static Elevator Instance;
 
     void Start()
@@ -16,6 +17,9 @@ public class Elevator : MonoBehaviour
     void Update()
     {
         if(ElevatorButton1.Instance.goUp == true)
+        {
             anim.SetBool("Up", true);
+            eleAudio.SetActive(true);
+        }
     }
 }
