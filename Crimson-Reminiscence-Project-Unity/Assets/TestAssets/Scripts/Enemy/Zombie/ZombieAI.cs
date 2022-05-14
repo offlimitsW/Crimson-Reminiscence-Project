@@ -92,11 +92,6 @@ public class ZombieAI : MonoBehaviour
         speed = 3f;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Projectile"))
-            TakeDamage(3);
-    }
 
     public void TakeDamage(float amount)
     {

@@ -23,6 +23,12 @@ public class EleDoor : MonoBehaviour
             anim.SetBool("Open", true);
             StartCoroutine(Open());
         }
+        if (ElevatorButton1.Instance.hasBeenPressed == true)
+        {
+            TestInteractable.Instance.hasBeenPressed = false;
+            anim.SetBool("Open", false);
+            StartCoroutine(Open());
+        }
     }
 
     IEnumerator Open()

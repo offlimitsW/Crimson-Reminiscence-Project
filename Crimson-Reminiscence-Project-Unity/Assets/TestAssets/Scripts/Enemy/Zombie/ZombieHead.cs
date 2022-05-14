@@ -21,13 +21,6 @@ public class ZombieHead : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Projectile"))
-        {
-            TakeDamage(5);
-        }
-    }
 
     public void TakeDamage(float amount)
     {
