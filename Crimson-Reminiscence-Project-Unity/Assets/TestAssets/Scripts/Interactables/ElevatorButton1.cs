@@ -6,11 +6,11 @@ public class ElevatorButton1 : Interactable
 {
     [Header("Paramaters")]
     public bool hasBeenPressed = false;
+    public bool canGoUp = true;
     public bool goUp = false;
 
     [SerializeField] private AudioSource audioSource = default;
     [SerializeField] private AudioClip[] interact = default;
-    [SerializeField] private AudioClip[] denied = default;
 
     Animator anim;
     public static ElevatorButton1 Instance;

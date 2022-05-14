@@ -6,6 +6,7 @@ public class ElevatorButton : Interactable
 {
     [Header("Paramaters")]
     public bool hasBeenPressed = false;
+    public bool canBeenPressed = true;
     public bool isPowered = false;
 
     [SerializeField] private AudioSource audioSource = default;
@@ -23,7 +24,7 @@ public class ElevatorButton : Interactable
 
     public override void OnInteract()
     {
-        if(isPowered == true && hasBeenPressed == false)
+        if(isPowered == true && hasBeenPressed == false && canBeenPressed == true)
         {
             audioSource.PlayOneShot(interact[UnityEngine.Random.Range(0, interact.Length - 1)]);
             hasBeenPressed = true;
