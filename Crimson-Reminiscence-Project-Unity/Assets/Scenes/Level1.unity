@@ -28524,7 +28524,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1039925307}
   - component: {fileID: 1039925309}
-  - component: {fileID: 1039925308}
   m_Layer: 0
   m_Name: PowerLever (1)
   m_TagString: Untagged
@@ -28548,18 +28547,6 @@ Transform:
   m_Father: {fileID: 909907904}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1039925308
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1039925306}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d71b2e7a699f014e8d1d4709a04c53f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &1039925309
 Animator:
   serializedVersion: 3
@@ -61675,7 +61662,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1823122731}
   - component: {fileID: 1823122733}
-  - component: {fileID: 1823122732}
   m_Layer: 0
   m_Name: PowerLever (2)
   m_TagString: Untagged
@@ -61699,18 +61685,6 @@ Transform:
   m_Father: {fileID: 909907904}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1823122732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1823122730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d71b2e7a699f014e8d1d4709a04c53f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &1823122733
 Animator:
   serializedVersion: 3
@@ -63888,7 +63862,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1937084836}
   - component: {fileID: 1937084838}
-  - component: {fileID: 1937084837}
   m_Layer: 0
   m_Name: PowerLever (3)
   m_TagString: Untagged
@@ -63912,18 +63885,6 @@ Transform:
   m_Father: {fileID: 909907904}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1937084837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1937084835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d71b2e7a699f014e8d1d4709a04c53f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &1937084838
 Animator:
   serializedVersion: 3
@@ -70018,6 +69979,14 @@ PrefabInstance:
     - target: {fileID: 1846674877, guid: c80ed202901bf5d4f8f830fe09343afe, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4287861651
+      objectReference: {fileID: 0}
+    - target: {fileID: 1644787523179334393, guid: c80ed202901bf5d4f8f830fe09343afe, type: 3}
+      propertyPath: lookSpeedX
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1644787523179334393, guid: c80ed202901bf5d4f8f830fe09343afe, type: 3}
+      propertyPath: lookSpeedY
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 1644787523179334394, guid: c80ed202901bf5d4f8f830fe09343afe, type: 3}
       propertyPath: m_Name
