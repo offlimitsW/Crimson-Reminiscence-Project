@@ -4,15 +4,5 @@ using UnityEngine;
 
 public class PlatformAddonAble : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    // Allow platform to be create onto of this object
 }

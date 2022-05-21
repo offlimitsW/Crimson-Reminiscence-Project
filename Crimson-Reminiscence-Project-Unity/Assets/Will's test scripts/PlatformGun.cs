@@ -30,15 +30,18 @@ public class PlatformGun : MonoBehaviour
                 if (selection.GetComponent<GhostPlatform>() != null)
                 {
                     print("Raycast hit " + selection.name);
+
+                    selection.GetComponent<GhostPlatform>().Activate();
+
                     // Reminder: add a method in GhostPlatform to switch MAT
-                    if (selection.GetComponentInChildren<Renderer>() != null)
-                    {
-                        selection.GetComponentInChildren<Renderer>().material = solidPlatformMaterial;
-                    }
-                    if (selection.GetComponent<BoxCollider>() != null)
-                    {
-                        selection.GetComponent<BoxCollider>().isTrigger = false;
-                    }
+                    //if (selection.GetComponentInChildren<Renderer>() != null)
+                    //{
+                    //    selection.GetComponentInChildren<Renderer>().material = solidPlatformMaterial;
+                    //}
+                    //if (selection.GetComponent<BoxCollider>() != null)
+                    //{
+                    //    selection.GetComponent<BoxCollider>().isTrigger = false;
+                    //}
                 }
 
                 else print("cant add platform here");
