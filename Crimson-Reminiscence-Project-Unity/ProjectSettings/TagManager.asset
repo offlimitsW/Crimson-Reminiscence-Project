@@ -7,6 +7,12 @@ TagManager:
   - Footsteps/Stone
   - Door
   - Projectile
+  - Footsteps/Gravel
+  - Footsteps/Dirt
+  - Enemy
+  - Footsteps/Wood
+  - Footsteps/Grass
+  - Footsteps/Metal
   layers:
   - Default
   - TransparentFX
@@ -14,7 +20,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Environment
   - 
   - 
   - 

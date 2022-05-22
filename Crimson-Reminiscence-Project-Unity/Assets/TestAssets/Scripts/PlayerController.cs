@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private KeyCode sprintKey = KeyCode.LeftShift;
     [SerializeField] private KeyCode jumpKey = KeyCode.Space;
     [SerializeField] private KeyCode crouchKey = KeyCode.LeftControl;
+    [SerializeField] private KeyCode flashLightKey = KeyCode.F;
     [SerializeField] private KeyCode interactKey = KeyCode.E;
     [SerializeField] private KeyCode zoomKey = KeyCode.Mouse1;
 
@@ -119,7 +120,10 @@ public class PlayerController : MonoBehaviour
 
     [Header("Weapons Parameters")]
     [SerializeField] private bool isHoldingPistol;
+    [SerializeField] private bool flashLightOn;
+    [SerializeField] private AudioClip[] flashLightClick = default;
     public GameObject gunPistol;
+    public GameObject flashLight;
 
     private float GetCurrentOffset => isCrouching ? baseStepSpeed * crouchStepMultipler : isSprinting ? baseStepSpeed * sprintStepMultipler : baseStepSpeed;
 
@@ -174,6 +178,7 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        flashLightOn = true;
 
         playerCamera = GetComponentInChildren<Camera>();
         characterController = GetComponent<CharacterController>();
@@ -225,7 +230,20 @@ public class PlayerController : MonoBehaviour
             ApplyFinalMovements();
         }
 
-        if(isZoomed == true)
+        if (Input.GetKeyDown(flashLightKey) && flashLightOn == true)
+        {
+            flashLightOn = false;
+            flashLight.SetActive(false);
+            footstepAudioSource.PlayOneShot(flashLightClick[UnityEngine.Random.Range(0, flashLightClick.Length - 1)]);
+        }
+        else if (Input.GetKeyDown(flashLightKey) && flashLightOn == false)
+        {
+            flashLightOn = true;
+            flashLight.SetActive(true);
+            footstepAudioSource.PlayOneShot(flashLightClick[UnityEngine.Random.Range(0, flashLightClick.Length - 1)]);
+        }
+
+        if (isZoomed == true)
         {
             walkSpeed = 1.75f;
             sprintSpeed = 3.5f;
@@ -549,7 +567,7 @@ public class PlayerController : MonoBehaviour
 
         if(footstepTimer <= 0)
         {
-            if(Physics.Raycast(playerCamera.transform.position, Vector3.down, out RaycastHit hit, 3))
+            if(Physics.Raycast(playerCamera.transform.position, Vector3.down, out RaycastHit hit, 4))
             {
                 switch(hit.collider.tag)
                 {
