@@ -10,10 +10,17 @@ public class PlatformGun : MonoBehaviour
     [SerializeField] GameObject platformPrefab;
     // Maybe the player can have different sizes of platform to choose from?
 
+    PlatformGunManager platformGunManager;
+
+    private void Start()
+    {
+        platformGunManager = GetComponent<PlatformGunManager>();
+    }
+
     void Update()
     {
         // When fire, check if the collided object are able to Instantiate platformPrefab
-        if (Input.GetButton("Fire1") && canShoot == true)
+        if (Input.GetButtonDown("Fire1") && canShoot == true)
         {
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -24,14 +31,14 @@ public class PlatformGun : MonoBehaviour
                 if (selection.GetComponent<PlatformAddonAble>() != null)
                 {
                     print("Raycast hit " + selection.name + " at position: " + hit.point);
-                    Instantiate(platformPrefab, hit.point, hit.transform.rotation);
+                    platformGunManager.AddNewPlatform(Instantiate(platformPrefab, hit.point, hit.transform.rotation));
                 }
                 if (selection.GetComponent<GhostPlatform>() != null)
                 {
                     print("Raycast hit " + selection.name);
                     selection.GetComponent<GhostPlatform>().Activate();
                 }
-                else print("cant add platform here");
+                else print("Can't add platform here");
             }
         }
     }
