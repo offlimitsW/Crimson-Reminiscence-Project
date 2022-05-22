@@ -79,7 +79,6 @@ public class GhostPlatform : MonoBehaviour
         if (counter <= timeDespawnWarning && counterIsActive && !isWarningActivated)
         {
             print("WARNING!! Despawning!!");
-            //animator.SetTrigger("TrDespawning");
             animator.SetBool("IsDespawning", true);
             isWarningActivated = true;
         }

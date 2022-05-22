@@ -7,12 +7,17 @@ TagManager:
   - Footsteps/Stone
   - Door
   - Projectile
+<<<<<<< Updated upstream
   - Footsteps/Gravel
   - Footsteps/Dirt
   - Enemy
   - Footsteps/Wood
   - Footsteps/Grass
   - Footsteps/Metal
+=======
+  - Selectable
+  - Platform
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
