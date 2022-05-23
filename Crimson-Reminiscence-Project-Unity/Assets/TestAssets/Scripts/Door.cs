@@ -5,6 +5,7 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     public GameObject doorAudio;
+    public GameObject closeDoorAudio;
     public GameObject zombie;
 
     [Header("Spawn Zombie Locations")]
@@ -29,6 +30,14 @@ public class Door : MonoBehaviour
             anim.SetBool("IsOpening", true);
             Instantiate(zombie, zombieSpawnOrigin.transform.position, transform.rotation);
             StartCoroutine(Open());
+        }
+
+        if (CloseDoorSensor.Instance.playerEntered == true && CloseDoorSensor.Instance.playerHasEntered == false)
+        {
+            CloseDoorSensor.Instance.playerHasEntered = true;
+            anim.SetBool("Close", true);
+            Instantiate(zombie, zombieSpawnOrigin2.transform.position, transform.rotation);
+            closeDoorAudio.SetActive(true);
         }
     }
 

@@ -6,6 +6,7 @@ public class TestInteractable : Interactable
 {
     [Header("Paramaters")]
     public bool hasBeenPressed = false;
+    public bool canBePressed = true;
 
     [SerializeField] private AudioSource audioSource = default;
     [SerializeField] private AudioClip[] interact = default;
@@ -21,10 +22,14 @@ public class TestInteractable : Interactable
 
     public override void OnInteract()
     {
-        audioSource.PlayOneShot(interact[UnityEngine.Random.Range(0, interact.Length - 1)]);
-        hasBeenPressed = true;
-        anim.SetBool("Pressed", true);
-        print("Interacted with " + gameObject.name);
+        if(canBePressed == true)
+        {
+            audioSource.PlayOneShot(interact[UnityEngine.Random.Range(0, interact.Length - 1)]);
+            canBePressed = false;
+            hasBeenPressed = true;
+            anim.SetBool("Pressed", true);
+            print("Interacted with " + gameObject.name);
+        }
     }
     public override void OnFocus()
     {
