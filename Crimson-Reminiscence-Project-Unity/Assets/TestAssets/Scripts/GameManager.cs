@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Lab Entrance Control Panel")]
     public GameObject ComputerAudio;
+    public GameObject controlPanel;
 
     void Start()
     {
@@ -48,5 +49,7 @@ public class GameManager : MonoBehaviour
         lightSource5.SetActive(true);
         yield return new WaitForSeconds(1.0f);
         ComputerAudio.SetActive(true);
+        ControlPanelMainFrame.Instance.mainFramePowered = true;
+        controlPanel.SetActive(true);
     }
 }
