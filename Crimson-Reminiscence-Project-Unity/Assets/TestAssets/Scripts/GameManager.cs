@@ -16,8 +16,12 @@ public class GameManager : MonoBehaviour
     public GameObject lightSource5;
 
     [Header("Lab Entrance Control Panel")]
+    [SerializeField] private AudioSource screenAudioSource = default;
+    [SerializeField] private AudioClip[] passed = default;
     public GameObject ComputerAudio;
     public GameObject controlPanel;
+    public GameObject controlPanelPassed;
+    public bool playPassed = true;
 
     void Start()
     {
@@ -31,6 +35,11 @@ public class GameManager : MonoBehaviour
             powerOn = true;
 
             StartCoroutine(LightsOn());
+        }
+
+        if (playPassed == true && ControlPanelButton_TL.Instance.hasBeenPressed == true && ControlPanelButton_RL.Instance.hasBeenPressed == true && ControlPanelButton_MLL.Instance.hasBeenPressed == true && ControlPanelButton_MR.Instance.hasBeenPressed == true && ControlPanelButton_RT.Instance.hasBeenPressed == true && ControlPanelButton_MRL.Instance.hasBeenPressed == true && ControlPanelButton_ML.Instance.hasBeenPressed == true && ControlPanelButton_LB.Instance.hasBeenPressed == true)
+        {
+            StartCoroutine(WalkWay());
         }
     }
 
@@ -51,5 +60,42 @@ public class GameManager : MonoBehaviour
         ComputerAudio.SetActive(true);
         ControlPanelMainFrame.Instance.mainFramePowered = true;
         controlPanel.SetActive(true);
+    }
+
+    private IEnumerator WalkWay()
+    {
+        playPassed = false;
+        yield return new WaitForSeconds(0.5f);
+        controlPanelPassed.SetActive(false);
+        screenAudioSource.PlayOneShot(passed[UnityEngine.Random.Range(0, passed.Length - 1)]);
+
+        yield return new WaitForSeconds(0.5f);
+        controlPanelPassed.SetActive(true);
+        screenAudioSource.PlayOneShot(passed[UnityEngine.Random.Range(0, passed.Length - 1)]);
+
+        yield return new WaitForSeconds(0.5f);
+        controlPanelPassed.SetActive(false);
+        screenAudioSource.PlayOneShot(passed[UnityEngine.Random.Range(0, passed.Length - 1)]);
+
+        yield return new WaitForSeconds(0.5f);
+        controlPanelPassed.SetActive(true);
+        screenAudioSource.PlayOneShot(passed[UnityEngine.Random.Range(0, passed.Length - 1)]);
+
+        yield return new WaitForSeconds(0.5f);
+        controlPanelPassed.SetActive(false);
+        screenAudioSource.PlayOneShot(passed[UnityEngine.Random.Range(0, passed.Length - 1)]);
+
+        yield return new WaitForSeconds(0.5f);
+        controlPanelPassed.SetActive(true);
+        screenAudioSource.PlayOneShot(passed[UnityEngine.Random.Range(0, passed.Length - 1)]);
+
+        yield return new WaitForSeconds(0.5f);
+        controlPanelPassed.SetActive(false);
+        screenAudioSource.PlayOneShot(passed[UnityEngine.Random.Range(0, passed.Length - 1)]);
+
+        yield return new WaitForSeconds(0.5f);
+        controlPanelPassed.SetActive(true);
+        screenAudioSource.PlayOneShot(passed[UnityEngine.Random.Range(0, passed.Length - 1)]);
+        Platform.Instance.powered = true;
     }
 }
