@@ -32,12 +32,12 @@ public class ZombieAI : MonoBehaviour
     void Update()
     {
 
-        if (isAlive == true)
+        if (isAlive == true && isAttacking == false)
         {
             transform.Translate(Vector3.forward * Time.deltaTime * speed);
         }
 
-        if (isCorpse == false)
+        if (isCorpse == false && isAttacking == false)
         {
             transform.LookAt(player.gameObject.transform.position);
         }
@@ -48,7 +48,7 @@ public class ZombieAI : MonoBehaviour
         }
 
         Debug.DrawRay(transform.position, Vector3.back, Color.red);
-        if (isAlive == true && Physics.Raycast(transform.position, Vector3.back, out RaycastHit hitPlayer, 1f))
+        if (isAlive == true && Physics.Raycast(transform.position, Vector3.back, out RaycastHit hitPlayer, 2.5f))
         {
             hitPointNormal += hitPlayer.normal;
 
@@ -71,7 +71,7 @@ public class ZombieAI : MonoBehaviour
         speed = 0f;
         anim.SetTrigger("Attack");
         yield return new WaitForSeconds(0.15f);
-        if (isAlive == true && Physics.Raycast(transform.position, Vector3.back, out RaycastHit hitPlayer, 1f))
+        if (isAlive == true && Physics.Raycast(transform.position, Vector3.back, out RaycastHit hitPlayer, 2.5f))
         {
             hitPointNormal += hitPlayer.normal;
 
@@ -82,6 +82,7 @@ public class ZombieAI : MonoBehaviour
 
             if (hitPlayer.rigidbody != null)
             {
+                speed = 0f;
                 isAttacking = true;
                 PlayerController.onTakeDamage(1);
             }

@@ -11,12 +11,6 @@ public class ZombieLimb : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Projectile"))
-            TakeDamage(5);
-    }
-
     public void TakeDamage(float amount)
     {
         health -= amount;

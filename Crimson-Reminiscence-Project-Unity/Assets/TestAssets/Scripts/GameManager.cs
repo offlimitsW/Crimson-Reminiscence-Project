@@ -8,12 +8,14 @@ public class GameManager : MonoBehaviour
 
     [Header("Lab Entrance Lights")]
     public bool powerOn = false;
+    public GameObject redLight;
     public GameObject lightSource;
     public GameObject lightSource1;
     public GameObject lightSource2;
     public GameObject lightSource3;
     public GameObject lightSource4;
     public GameObject lightSource5;
+    public GameObject lightSource6;
 
     [Header("Lab Entrance Control Panel")]
     [SerializeField] private AudioSource screenAudioSource = default;
@@ -22,6 +24,7 @@ public class GameManager : MonoBehaviour
     public GameObject controlPanel;
     public GameObject controlPanelPassed;
     public bool playPassed = true;
+    public bool labDoorOpen = false;
 
     void Start()
     {
@@ -51,7 +54,9 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         lightSource2.SetActive(true);
         yield return new WaitForSeconds(1.0f);
+        redLight.SetActive(false);
         lightSource3.SetActive(true);
+        lightSource6.SetActive(true);
         yield return new WaitForSeconds(1.0f);
         lightSource4.SetActive(true);
         yield return new WaitForSeconds(1.0f);
@@ -97,5 +102,8 @@ public class GameManager : MonoBehaviour
         controlPanelPassed.SetActive(true);
         screenAudioSource.PlayOneShot(passed[UnityEngine.Random.Range(0, passed.Length - 1)]);
         Platform.Instance.powered = true;
+
+        yield return new WaitForSeconds(2f);
+        labDoorOpen = true;
     }
 }

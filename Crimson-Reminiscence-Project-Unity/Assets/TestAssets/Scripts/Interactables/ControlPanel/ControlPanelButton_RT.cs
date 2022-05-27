@@ -75,7 +75,7 @@ public class ControlPanelButton_RT : Interactable
 
     private IEnumerator ButtonActivated()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.25f);
         screenAudioSource.PlayOneShot(screenPassed[UnityEngine.Random.Range(0, interact.Length - 1)]);
         activateButton.SetActive(true);
     }
