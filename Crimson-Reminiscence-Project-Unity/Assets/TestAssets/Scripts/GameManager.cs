@@ -54,8 +54,9 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         lightSource2.SetActive(true);
         yield return new WaitForSeconds(1.0f);
-        redLight.SetActive(false);
         lightSource3.SetActive(true);
+        yield return new WaitForSeconds(1.0f);
+        redLight.SetActive(false);
         lightSource6.SetActive(true);
         yield return new WaitForSeconds(1.0f);
         lightSource4.SetActive(true);

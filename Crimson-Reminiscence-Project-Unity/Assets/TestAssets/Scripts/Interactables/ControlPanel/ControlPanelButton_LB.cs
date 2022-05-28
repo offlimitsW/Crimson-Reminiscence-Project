@@ -24,6 +24,11 @@ public class ControlPanelButton_LB : Interactable
         Instance = this;
         anim = GetComponent<Animator>();
     }
+    private void Update()
+    {
+        if (hasBeenPressed == false)
+            anim.SetBool("Pressed", false);
+    }
 
     public override void OnInteract()
     {
