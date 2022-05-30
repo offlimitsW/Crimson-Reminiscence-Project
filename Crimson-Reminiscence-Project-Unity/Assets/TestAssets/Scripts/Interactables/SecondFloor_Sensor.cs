@@ -28,6 +28,7 @@ public class SecondFloor_Sensor : MonoBehaviour
         if (other.CompareTag("Player") && playerEntered == false)
         {
             playerEntered = true;
+            GameManager.Instance.spawnRoomRemove = true;
             flickerLight.SetActive(false);
             doorLight.SetActive(false);
             Instantiate(zombie, zombieSpawnOrigin.transform.position, transform.rotation);

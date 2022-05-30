@@ -45,5 +45,6 @@ public class EBoxLever : Interactable
         audioSource.PlayOneShot(interact[UnityEngine.Random.Range(0, interact.Length - 1)]);
         yield return new WaitForSeconds(1.25f);
         generatorAudio.SetActive(true);
+        GameManager.Instance.spawnPowerOn = true;
     }
 }
