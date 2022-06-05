@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeathZone : MonoBehaviour
+public class SpawnZone : MonoBehaviour
 {
     SpawnManager spawnManager;
 
@@ -15,9 +15,8 @@ public class DeathZone : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            // Death Event
-            print("dies lol");
-            StartCoroutine(spawnManager.SpawnPlayer());
+            //set this zone as current spawn
+            spawnManager.SetCurrentSpawnPoint(this.gameObject);
         }
     }
 }

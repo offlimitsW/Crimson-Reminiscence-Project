@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    public bool disable = false;
     public bool canMove { get; private set; } = true;
     public bool isSprinting => canSprint  && Input.GetKey(sprintKey);
     private bool ShouldJump => Input.GetKeyDown(jumpKey) && characterController.isGrounded;
@@ -201,216 +202,219 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (canMove)
+        if (!disable) 
         {
-            HandleMovementInput();
-            HandleMouseLook();
-
-            if(canJump)
-                HandleJump();
-
-            if (canCrouch)
-                CanCrouch();
-
-            if (canHeadbob)
-                HandleHeadbob();
-
-            if (canZoom)
-                HandleZoom();
-
-            if (useFootsteps)
-                HandleFootsteps();
-
-            if (canInteract)
+            if (canMove)
             {
-                HandleInteractionCheck();
-                HandleInteractionInput();
+                HandleMovementInput();
+                HandleMouseLook();
+
+                if (canJump)
+                    HandleJump();
+
+                if (canCrouch)
+                    CanCrouch();
+
+                if (canHeadbob)
+                    HandleHeadbob();
+
+                if (canZoom)
+                    HandleZoom();
+
+                if (useFootsteps)
+                    HandleFootsteps();
+
+                if (canInteract)
+                {
+                    HandleInteractionCheck();
+                    HandleInteractionInput();
+                }
+
+                ApplyFinalMovements();
             }
 
-            ApplyFinalMovements();
-        }
-
-        if (Input.GetKeyDown(flashLightKey) && flashLightOn == true)
-        {
-            flashLightOn = false;
-            flashLight.SetActive(false);
-            footstepAudioSource.PlayOneShot(flashLightClick[UnityEngine.Random.Range(0, flashLightClick.Length - 1)]);
-        }
-        else if (Input.GetKeyDown(flashLightKey) && flashLightOn == false)
-        {
-            flashLightOn = true;
-            flashLight.SetActive(true);
-            footstepAudioSource.PlayOneShot(flashLightClick[UnityEngine.Random.Range(0, flashLightClick.Length - 1)]);
-        }
-
-        if (isZoomed == true)
-        {
-            walkSpeed = 1.75f;
-            sprintSpeed = 3.5f;
-            crouchSpeed = 0.75f;
-
-            walkBobSpeed = 7f;
-            walkBobAmount = 0.015f;
-            sprintBobSpeed = 9f;
-            sprintBobAmount = 0.025f;
-            crouchBobSpeed = 4f;
-            crouchBobAmount = 0.0075f;
-
-            baseStepSpeed = 0.85f;
-
-            if (Input.GetKey(sprintKey) && Input.GetKey(KeyCode.A) && characterController.isGrounded || Input.GetKey(sprintKey) && Input.GetKey(KeyCode.D) && characterController.isGrounded)
+            if (Input.GetKeyDown(flashLightKey) && flashLightOn == true)
             {
-                sprintSpeed = 2.75f;
-                sprintBobSpeed = 7f;
-                sprintBobAmount = 0.02f;
-
-                baseStepSpeed = 0.75f;
+                flashLightOn = false;
+                flashLight.SetActive(false);
+                footstepAudioSource.PlayOneShot(flashLightClick[UnityEngine.Random.Range(0, flashLightClick.Length - 1)]);
+            }
+            else if (Input.GetKeyDown(flashLightKey) && flashLightOn == false)
+            {
+                flashLightOn = true;
+                flashLight.SetActive(true);
+                footstepAudioSource.PlayOneShot(flashLightClick[UnityEngine.Random.Range(0, flashLightClick.Length - 1)]);
             }
 
-            if (Input.GetKey(KeyCode.A) && characterController.isGrounded ||Input.GetKey(KeyCode.D) && characterController.isGrounded)
+            if (isZoomed == true)
             {
-                walkSpeed = 1.25f;
-                walkBobSpeed = 6.25f;
-                walkBobAmount = 0.00075f;
+                walkSpeed = 1.75f;
+                sprintSpeed = 3.5f;
+                crouchSpeed = 0.75f;
 
-                baseStepSpeed = 0.95f;
+                walkBobSpeed = 7f;
+                walkBobAmount = 0.015f;
+                sprintBobSpeed = 9f;
+                sprintBobAmount = 0.025f;
+                crouchBobSpeed = 4f;
+                crouchBobAmount = 0.0075f;
+
+                baseStepSpeed = 0.85f;
+
+                if (Input.GetKey(sprintKey) && Input.GetKey(KeyCode.A) && characterController.isGrounded || Input.GetKey(sprintKey) && Input.GetKey(KeyCode.D) && characterController.isGrounded)
+                {
+                    sprintSpeed = 2.75f;
+                    sprintBobSpeed = 7f;
+                    sprintBobAmount = 0.02f;
+
+                    baseStepSpeed = 0.75f;
+                }
+
+                if (Input.GetKey(KeyCode.A) && characterController.isGrounded || Input.GetKey(KeyCode.D) && characterController.isGrounded)
+                {
+                    walkSpeed = 1.25f;
+                    walkBobSpeed = 6.25f;
+                    walkBobAmount = 0.00075f;
+
+                    baseStepSpeed = 0.95f;
+                }
+
+                if (Input.GetKey(KeyCode.S) && characterController.isGrounded)
+                {
+                    walkSpeed = 1.5f;
+                    walkBobSpeed = 6f;
+                    walkBobAmount = 0.0015f;
+
+                    baseStepSpeed = 0.95f;
+                }
+            }
+            else
+            {
+                walkSpeed = 3.5f;
+                sprintSpeed = 6.5f;
+                crouchSpeed = 1.5f;
+
+                walkBobSpeed = 14f;
+                walkBobAmount = 0.03f;
+                sprintBobSpeed = 18f;
+                sprintBobAmount = 0.05f;
+                crouchBobSpeed = 8f;
+                crouchBobAmount = 0.0125f;
+
+                baseStepSpeed = 0.5f;
             }
 
-            if (Input.GetKey(KeyCode.S) && characterController.isGrounded)
+            if (currentHealth <= 0)
+                healthBar.SetActive(false);
+            else if (currentHealth >= 0)
+                healthBar.SetActive(true);
+
+            if (currentHealth < 10)
+                healthBar1.SetActive(false);
+            else if (currentHealth >= 10)
+                healthBar1.SetActive(true);
+
+            if (currentHealth < 20)
+                healthBar2.SetActive(false);
+            else if (currentHealth >= 20)
+                healthBar2.SetActive(true);
+
+            if (currentHealth < 30)
             {
-                walkSpeed = 1.5f;
-                walkBobSpeed = 6f;
-                walkBobAmount = 0.0015f;
-
-                baseStepSpeed = 0.95f;
+                healthBar3.SetActive(false);
+                canSprint = false;
             }
-        }
-        else
-        {
-            walkSpeed = 3.5f;
-            sprintSpeed = 6.5f;
-            crouchSpeed = 1.5f;
-
-            walkBobSpeed = 14f;
-            walkBobAmount = 0.03f;
-            sprintBobSpeed = 18f;
-            sprintBobAmount = 0.05f;
-            crouchBobSpeed = 8f;
-            crouchBobAmount = 0.0125f;
-
-            baseStepSpeed = 0.5f;
-        }
-
-        if (currentHealth <= 0)
-            healthBar.SetActive(false);
-        else if (currentHealth >= 0)
-            healthBar.SetActive(true);
-
-        if (currentHealth < 10)
-            healthBar1.SetActive(false);
-        else if (currentHealth >= 10)
-            healthBar1.SetActive(true);
-
-        if (currentHealth < 20)
-            healthBar2.SetActive(false);
-        else if (currentHealth >= 20)
-            healthBar2.SetActive(true);
-
-        if (currentHealth < 30)
-        {
-            healthBar3.SetActive(false);
-            canSprint = false;
-        }
-        else if (currentHealth >= 30)
-        {
-            healthBar3.SetActive(true);
-            canSprint = true;
-        }
-
-        if (currentHealth < 40)
-            healthBar4.SetActive(false);
-        else if (currentHealth >= 40)
-            healthBar4.SetActive(true);
-
-        if (currentHealth < 50)
-            healthBar5.SetActive(false);
-        else if (currentHealth >= 50)
-            healthBar5.SetActive(true);
-
-        if (currentHealth < 60)
-            healthBar6.SetActive(false);
-        else if (currentHealth >= 60)
-            healthBar6.SetActive(true);
-
-        if (currentHealth < 70)
-            healthBar7.SetActive(false);
-        else if (currentHealth >= 70)
-            healthBar7.SetActive(true);
-
-        if (currentHealth < 80)
-            healthBar8.SetActive(false);
-        else if (currentHealth >= 80)
-            healthBar8.SetActive(true);
-
-        if (currentHealth < 90)
-            healthBar9.SetActive(false);
-        else if (currentHealth >= 100)
-            healthBar9.SetActive(true);
-
-        if (currentHealth >= 60 && damageDisplay.alpha > 0)
-        {
-            damageDisplay.alpha -= Time.deltaTime;
-            if (damageDisplay.alpha <= 0)
+            else if (currentHealth >= 30)
             {
-                damageDisplay.alpha = 0;
+                healthBar3.SetActive(true);
+                canSprint = true;
             }
-        }
 
-        if (currentHealth >= 30 && damageDisplay2.alpha > 0)
-        {
-            damageDisplay2.alpha -= Time.deltaTime;
-            if (damageDisplay2.alpha <= 0)
+            if (currentHealth < 40)
+                healthBar4.SetActive(false);
+            else if (currentHealth >= 40)
+                healthBar4.SetActive(true);
+
+            if (currentHealth < 50)
+                healthBar5.SetActive(false);
+            else if (currentHealth >= 50)
+                healthBar5.SetActive(true);
+
+            if (currentHealth < 60)
+                healthBar6.SetActive(false);
+            else if (currentHealth >= 60)
+                healthBar6.SetActive(true);
+
+            if (currentHealth < 70)
+                healthBar7.SetActive(false);
+            else if (currentHealth >= 70)
+                healthBar7.SetActive(true);
+
+            if (currentHealth < 80)
+                healthBar8.SetActive(false);
+            else if (currentHealth >= 80)
+                healthBar8.SetActive(true);
+
+            if (currentHealth < 90)
+                healthBar9.SetActive(false);
+            else if (currentHealth >= 100)
+                healthBar9.SetActive(true);
+
+            if (currentHealth >= 60 && damageDisplay.alpha > 0)
             {
-                damageDisplay2.alpha = 0;
+                damageDisplay.alpha -= Time.deltaTime;
+                if (damageDisplay.alpha <= 0)
+                {
+                    damageDisplay.alpha = 0;
+                }
             }
-        }
 
-        //Strafing and walk/sprint backwards
-        if (isZoomed == false && Input.GetKey(sprintKey) && Input.GetKey(KeyCode.A) && characterController.isGrounded || isZoomed == false && Input.GetKey(sprintKey) && Input.GetKey(KeyCode.D) && characterController.isGrounded)
-        {
-            sprintSpeed = 4.5f;
-            sprintBobSpeed = 15f;
-            sprintBobAmount = 0.0425f;
+            if (currentHealth >= 30 && damageDisplay2.alpha > 0)
+            {
+                damageDisplay2.alpha -= Time.deltaTime;
+                if (damageDisplay2.alpha <= 0)
+                {
+                    damageDisplay2.alpha = 0;
+                }
+            }
 
-            baseStepSpeed = 0.55f;
-        }
+            //Strafing and walk/sprint backwards
+            if (isZoomed == false && Input.GetKey(sprintKey) && Input.GetKey(KeyCode.A) && characterController.isGrounded || isZoomed == false && Input.GetKey(sprintKey) && Input.GetKey(KeyCode.D) && characterController.isGrounded)
+            {
+                sprintSpeed = 4.5f;
+                sprintBobSpeed = 15f;
+                sprintBobAmount = 0.0425f;
 
-        if (isZoomed == false && Input.GetKey(sprintKey) && Input.GetKey(KeyCode.S) && characterController.isGrounded)
-        {
-            sprintSpeed = 3.75f;
-            sprintBobSpeed = 12f;
-            sprintBobAmount = 0.035f;
+                baseStepSpeed = 0.55f;
+            }
 
-            baseStepSpeed = 0.575f;
-        }
+            if (isZoomed == false && Input.GetKey(sprintKey) && Input.GetKey(KeyCode.S) && characterController.isGrounded)
+            {
+                sprintSpeed = 3.75f;
+                sprintBobSpeed = 12f;
+                sprintBobAmount = 0.035f;
 
-        if (isZoomed == false &&  Input.GetKey(KeyCode.S) && characterController.isGrounded)
-        {
-            walkSpeed = 2.15f;
-            walkBobSpeed = 10f;
-            walkBobAmount = 0.02f;
+                baseStepSpeed = 0.575f;
+            }
 
-            baseStepSpeed = 0.7f;
-        }
+            if (isZoomed == false && Input.GetKey(KeyCode.S) && characterController.isGrounded)
+            {
+                walkSpeed = 2.15f;
+                walkBobSpeed = 10f;
+                walkBobAmount = 0.02f;
 
-        if (isZoomed == false && Input.GetKey(KeyCode.A) && characterController.isGrounded || isZoomed == false && Input.GetKey(KeyCode.D) && characterController.isGrounded)
-        {
-            walkSpeed = 2.75f;
-        }
+                baseStepSpeed = 0.7f;
+            }
 
-        if (RayCastPistol.Instance.isReloading == true)
-            canSprint = false;
-        else return;
+            if (isZoomed == false && Input.GetKey(KeyCode.A) && characterController.isGrounded || isZoomed == false && Input.GetKey(KeyCode.D) && characterController.isGrounded)
+            {
+                walkSpeed = 2.75f;
+            }
+
+            if (RayCastPistol.Instance.isReloading == true)
+                canSprint = false;
+            else return;
+        }       
     }
 
     private void ApplyDamage(float dmg)
