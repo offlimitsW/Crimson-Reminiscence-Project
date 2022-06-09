@@ -11,6 +11,7 @@ public class PauseMenu : MonoBehaviour
 
     public PlayerController playerController;
     public RayCastPistol pistolScript;
+    public PlatformGun platformGunScript;
     SpawnManager spawnManager;
 
     private void Awake()
@@ -39,6 +40,7 @@ public class PauseMenu : MonoBehaviour
     {
         playerController.disable = false;
         pistolScript.disable = false;
+        platformGunScript.disable = false;
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
@@ -50,6 +52,7 @@ public class PauseMenu : MonoBehaviour
     {
         playerController.disable = true;
         pistolScript.disable = true;
+        platformGunScript.disable = true;
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlatformGun : MonoBehaviour
 {
+    public bool disable;
+
     public bool canShoot = true;
     public float range = 100f;
 
@@ -19,6 +21,8 @@ public class PlatformGun : MonoBehaviour
 
     void Update()
     {
+        if (disable)
+            return;
         // When fire, check if the collided object are able to Instantiate platformPrefab
         if (Input.GetButtonDown("Fire1") && canShoot == true)
         {

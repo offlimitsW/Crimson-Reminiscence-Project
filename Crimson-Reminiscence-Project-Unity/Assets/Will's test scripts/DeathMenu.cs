@@ -10,6 +10,7 @@ public class DeathMenu : MonoBehaviour
 
     public PlayerController playerController;
     public RayCastPistol pistolScript;
+    public PlatformGun platformGunScript;
 
     public void ActivateDeathScreen()
     {
@@ -17,6 +18,7 @@ public class DeathMenu : MonoBehaviour
         {
             playerController.disable = true;
             pistolScript.disable = true;
+            platformGunScript.disable = true;
             isOnDeathScreen = true;
             deathMenuUI.SetActive(true);
             pauseMenuScript.disable = true;
@@ -31,6 +33,7 @@ public class DeathMenu : MonoBehaviour
         {
             playerController.disable = false;
             pistolScript.disable = false;
+            platformGunScript.disable = false;
             isOnDeathScreen = false;
             deathMenuUI.SetActive(false);
             pauseMenuScript.disable = false;
