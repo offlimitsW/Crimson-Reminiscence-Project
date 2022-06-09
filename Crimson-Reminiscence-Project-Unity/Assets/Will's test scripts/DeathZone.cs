@@ -4,20 +4,18 @@ using UnityEngine;
 
 public class DeathZone : MonoBehaviour
 {
-    SpawnManager spawnManager;
+    DeathMenu deathMenu;
 
     private void Awake()
     {
-        spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        deathMenu = GameObject.Find("UI").GetComponent<DeathMenu>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            // Death Event
-            print("dies lol");
-            StartCoroutine(spawnManager.SpawnPlayer());
+            deathMenu.ActivateDeathScreen();
         }
     }
 }

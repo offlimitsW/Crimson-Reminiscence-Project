@@ -21,10 +21,10 @@ public class SpawnManager : MonoBehaviour
     public IEnumerator SpawnPlayer()
     {
         playerController.disable = true;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         print(spawnPoints[currentIndex].transform.position);
         playerController.transform.position = spawnPoints[currentIndex].transform.position;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         playerController.disable = false;
     }
 

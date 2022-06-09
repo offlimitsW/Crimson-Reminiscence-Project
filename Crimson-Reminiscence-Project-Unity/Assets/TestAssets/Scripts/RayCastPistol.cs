@@ -4,8 +4,9 @@ using UnityEngine;
 using TMPro;
 
 public class RayCastPistol : MonoBehaviour
-
 {
+    public bool disable = false;
+
     [Header("Bullet Spawn/Destination")]
     public Transform rayCastOrigin;
     public Transform rayCastDestination;
@@ -62,9 +63,10 @@ public class RayCastPistol : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-
     void Update()
     {
+        if (disable)
+            return;
         currentAmmoText.text = bulletCount.ToString("0");
 
         if (Input.GetKeyDown(zoomKey))
@@ -144,7 +146,6 @@ public class RayCastPistol : MonoBehaviour
         {
             anim.SetTrigger("Empty");
             shootAudioSource.PlayOneShot(empty[UnityEngine.Random.Range(0, empty.Length - 1)]);
-
         }
 
         if (bulletCount == 0)
